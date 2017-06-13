@@ -29,10 +29,18 @@
                                     <action selector="GetAPIBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6B1-vI-rVF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ndi-ae-8ge">
-                                <rect key="frame" x="142" y="174" width="91" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAK-kH-UmI">
+                                <rect key="frame" x="119" y="212" width="150" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Post API"/>
+                                <state key="normal" title="Post API (Json)"/>
+                                <connections>
+                                    <action selector="PostbyJson:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W0o-Vj-z3h"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ndi-ae-8ge">
+                                <rect key="frame" x="126" y="174" width="137" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Post API (URL)"/>
                                 <connections>
                                     <action selector="PostAPIBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gdN-IB-w4l"/>
                                 </connections>
