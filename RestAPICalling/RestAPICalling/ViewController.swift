@@ -9,77 +9,77 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     
     //two ways to post::
     //1) via url and 2) via json
     
     //button action for posting to api through json
-
+    
     @IBAction func PostbyJson(_ sender: Any) {
         
         //post via json :: https://grokswift.com/simple-rest-with-swift/
         
         let todosEndpoint: String = "https://jsonplaceholder.typicode.com/todos"
-         
-         guard let todosURL = URL(string: todosEndpoint) else {
-         print("Error: cannot create URL")
-         return
-         }
-         
-         var todosUrlRequest = URLRequest(url: todosURL)
-         todosUrlRequest.httpMethod = "POST"
-         let newTodo: [String: Any] = ["title": "Mau is my name", "completed": false, "userId": 1]
-         //print(newTodo)
-         let jsonTodo: Data
-         do {
-         jsonTodo = try JSONSerialization.data(withJSONObject: newTodo, options: [])
-         todosUrlRequest.httpBody = jsonTodo
-         } catch {
-         print("Error: cannot create JSON from todo")
-         return
-         }
-         
-         let session = URLSession.shared
-         
-         let task = session.dataTask(with: todosUrlRequest) {
-         (data, response, error) in
-         guard error == nil else {
-         print("error calling POST on /todos/1")
-         print(error)
-         return
-         }
-         guard let responseData = data else {
-         print("Error: did not receive data")
-         return
-         }
-         
-         // parse the result as JSON, since that's what the API provides
-         do {
-         guard let receivedTodo = try JSONSerialization.jsonObject(with: responseData,
-         options: []) as? [String: Any] else {
-         print("Could not get JSON from responseData as dictionary")
-         return
-         }
-         print("The todo is: " + receivedTodo.description)
-         
-         guard let todoID = receivedTodo["id"] as? Int else {
-         print("Could not get todoID as int from JSON")
-         return
-         }
-         print("The ID is: \(todoID)")
-         } catch  {
-         print("error parsing response from POST on /todos")
-         return
-         }
-         }
-         task.resume()
+        
+        guard let todosURL = URL(string: todosEndpoint) else {
+            print("Error: cannot create URL")
+            return
+        }
+        
+        var todosUrlRequest = URLRequest(url: todosURL)
+        todosUrlRequest.httpMethod = "POST"
+        let newTodo: [String: Any] = ["title": "Mau is my name", "completed": false, "userId": 1]
+        //print(newTodo)
+        let jsonTodo: Data
+        do {
+            jsonTodo = try JSONSerialization.data(withJSONObject: newTodo, options: [])
+            todosUrlRequest.httpBody = jsonTodo
+        } catch {
+            print("Error: cannot create JSON from todo")
+            return
+        }
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: todosUrlRequest) {
+            (data, response, error) in
+            guard error == nil else {
+                print("error calling POST on /todos/1")
+                print(error)
+                return
+            }
+            guard let responseData = data else {
+                print("Error: did not receive data")
+                return
+            }
+            
+            // parse the result as JSON, since that's what the API provides
+            do {
+                guard let receivedTodo = try JSONSerialization.jsonObject(with: responseData,
+                                                                          options: []) as? [String: Any] else {
+                                                                            print("Could not get JSON from responseData as dictionary")
+                                                                            return
+                }
+                print("The todo is: " + receivedTodo.description)
+                
+                guard let todoID = receivedTodo["id"] as? Int else {
+                    print("Could not get todoID as int from JSON")
+                    return
+                }
+                print("The ID is: \(todoID)")
+            } catch  {
+                print("error parsing response from POST on /todos")
+                return
+            }
+        }
+        task.resume()
     }
     
     //button action for posting to api through url
     @IBAction func PostAPIBtn(_ sender: Any) {
         
-    
+        
         //post via url :: reference link: https://code.bradymower.com/swift-3-apis-network-requests-json-getting-the-data-4aaae8a5efc0 (Example 7)
         
         let urlToRequest = "https://aiaas.pandorabots.com/talk/1409611535153/robinsocial"
@@ -105,7 +105,7 @@ class ViewController: UIViewController {
         
         
     }
-   
+    
     //get info using API connection
     @IBAction func GetAPIBtn(_ sender: Any) {
         
@@ -139,10 +139,10 @@ class ViewController: UIViewController {
             do {
                 guard let todo = try JSONSerialization.jsonObject(with: responseData, options: [])
                     /*if get returns array of objects:
-                    let todoEndpoint: String = "https://jsonplaceholder.typicode.com/todos/"
+                     let todoEndpoint: String = "https://jsonplaceholder.typicode.com/todos/"
                      this will return array of objects, in that case the next line should be
-                        as? [Any] else
-                        */
+                     as? [Any] else
+                     */
                     as? [String: Any] else {
                         print("error trying to convert data to JSON")
                         return
@@ -170,11 +170,11 @@ class ViewController: UIViewController {
         
     }
     
-       
-   
     
     
     
-
+    
+    
+    
 }
 
