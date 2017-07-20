@@ -30,6 +30,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $response['error']=true;
     $response['message']='You are not authorized';
 }
+
+    
+    //prints in postman
 echo json_encode($response);
 
 ?>

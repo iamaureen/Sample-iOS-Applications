@@ -29,7 +29,14 @@ class DbOperation
             return false;
         }
     }
- 
+    
+    //Function to get user data from table
+    public function getUsers(){
+        $stmt = $this->conn->prepare("SELECT * FROM info");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result;
+    }
 }
 
 ?>

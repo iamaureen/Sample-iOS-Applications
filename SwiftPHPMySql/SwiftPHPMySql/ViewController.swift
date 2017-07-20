@@ -11,12 +11,62 @@ import UIKit
 class ViewController: UIViewController {
     
     //api url to post into mysql
-    let URL_DB = "http://192.168.1.17/robin/createteam"
+    let URL_POST = "http://192.168.1.17/robin/createteam"
+    
+    //api url to get user data from mysql
+    let URL_GET = "http://192.168.1.17/robin/getUser"
     
     // textfields declarations
     @IBOutlet weak var textFieldModule: UITextField!
     @IBOutlet weak var textFieldName: UITextField!
     
+    @IBAction func showBtn(_ sender: Any) {
+        
+        //https://www.simplifiedios.net/xcode-json-example-retrieve-data-mysql/
+        //for swift 3:
+        //create NSURL
+        let requestURL = URL(string: URL_GET)
+        
+        //create URL request
+        var request = URLRequest(url: requestURL!)
+        
+        //setting the method to POST
+        request.httpMethod = "GET"
+        
+        //creating a task to send the post request
+        let task = URLSession.shared.dataTask(with: request){
+            data, response, error in
+            
+            //exiting if there is some error
+            if error != nil{
+                print("error is \(error)")
+                return;
+            }
+            
+            //print("response = \(response)")
+            
+            //parsing the response
+            var userObj = [String]()
+            do {
+                
+                let parsedData = try JSONSerialization.jsonObject(with: data!) as! [String:AnyObject]
+                let userData = parsedData["user"] as! [AnyObject]
+                
+                for user in userData{
+                    var name = user["name"] as! String
+                    print("here :: \(name)")
+                }
+                
+            } catch {
+                print("Error deserializing JSON: \(error)")
+            }
+            
+
+        }
+        //executing the task
+        task.resume()
+        
+    }
     //Button action method
     @IBAction func saveBtn(_ sender: Any) {
         // we will send a POST request to the URL. we will use NSMutableURLRequest
@@ -24,13 +74,10 @@ class ViewController: UIViewController {
         //for swift 3: https://stackoverflow.com/questions/26364914/http-request-in-swift-with-post-method
         
         //create NSURL
-        let requestURL = URL(string: URL_DB)
+        let requestURL = URL(string: URL_POST)
         
         //create NSMutableURLRequest
         var request = URLRequest(url: requestURL!)
-        
-       
-        
         
         //setting the method to POST
         request.httpMethod = "POST"
@@ -62,8 +109,7 @@ class ViewController: UIViewController {
             
             print("i am here")
             
-            //parsing the response - in this case webservice is returning json
-            print(data)
+            print("response = \(response)")
             
             print("i am here too")
         }
